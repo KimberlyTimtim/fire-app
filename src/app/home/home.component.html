@@ -1,6 +1,6 @@
 <div class="container" fxLayout="column" fxLayoutGap="10px">
 
-  <button mat-raised-button routerLink="/report" class="report-btn" fxFlex="20" color="warn">Report Fire</button>
+  <button mat-raised-button routerLink="/report" class="report-btn" fxFlex="20" color="warn"><mat-icon>warning</mat-icon> Report Fire</button>
   <h2>Community Reports</h2>
   <mat-card fxFlex="40">
     <mat-card-title>Community Reports</mat-card-title>
@@ -18,3 +18,13 @@
     </mat-card-content>
   </mat-card>
 </div>
+<mat-toolbar color="primary">
+    <button mat-button matTooltip="Login" routerLink="/login">
+        <mat-icon>account_circle</mat-icon>
+    </button>
+    <button mat-button routerLink="/reportsviewer">
+      <mat-icon>
+        report
+      </mat-icon>
+    </button>
+</mat-toolbar>

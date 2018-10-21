@@ -24,6 +24,8 @@ export class ReportComponent implements OnInit {
 
   geocode;
 
+  verifiedFire = []
+
   zoom = 16;
   clicked = false;
   holdText = 'Send Report';
@@ -43,6 +45,13 @@ export class ReportComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.af.collection('newfire', ref => ref.where('status', '==', 'Verified')).valueChanges()
+    .subscribe(reports => {
+      console.log(reports)
+      this.verifiedFire = reports;
+    })
+
     this.mapsAPILoader.load().then(() => {
       this.aware.locChanged$
         .pipe(distinctUntilChanged())
@@ -86,16 +95,26 @@ export class ReportComponent implements OnInit {
     window.open('tel:911')
   }
 
-  sendReport() {
-    this.af.collection('firereports').add({
-      geo: this.geo,
-      user: this.aware.id,
-      address: this.searchControl.value
-    }).then(() => {
-      this.holdText = 'Send Report';
-      console.log('done');
-      this.snack.open('Report Sent', null, { duration: 2000 })
-    })
+  async sendReport() {
+    let db = this.af.firestore;
+    let data = await db.collection('firereports').doc(`${this.geo.lat}_${this.geo.lng}`).get();
+
+    if (data.exists) {
+      let counter = data.data().counter;
+      await db.collection('firereports').doc(`${this.geo.lat}_${this.geo.lng}`).set({ counter: counter + 1 }, { merge: true })
+    } else {
+      await db.collection('firereports').doc(`${this.geo.lat}_${this.geo.lng}`).set({
+        geo: this.geo,
+        user: this.aware.id,
+        address: this.searchControl.value,
+        status: 'Reported',
+        counter: 1
+      }, { merge: true })
+    }
+
+    this.holdText = 'Send Report';
+    console.log('done');
+    this.snack.open('Report Sent', null, { duration: 2000 })
   }
 
   mapClick(event) {
@@ -125,13 +144,13 @@ export class ReportComponent implements OnInit {
 
   holdHandler(e) {
     this.clicked = true;
-    this.holdText = 'Hold for 5 seconds to send report'
+    this.holdText = 'Hold for 3 seconds to send report'
     if (e === 0) {
       this.clicked = false;
       this.holdText = 'Send Report';
     }
 
-    if (e >= 5000) {
+    if (e >= 3000) {
       this.holdText = 'Sending...';
       this.sendReport();
     }

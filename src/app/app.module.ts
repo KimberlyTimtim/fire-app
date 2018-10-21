@@ -18,6 +18,8 @@ import { AgmCoreModule } from '@agm/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdditionalinfoComponent } from './additionalinfo/additionalinfo.component';
 import { HoldableDirective } from './holdable.directive';
+import { FirereportviewerComponent } from './firereportviewer/firereportviewer.component';
+import { LoginComponent } from './login/login.component';
 
 declare const google: any;
 
@@ -27,7 +29,9 @@ declare const google: any;
     ReportComponent,
     HomeComponent,
     AdditionalinfoComponent,
-    HoldableDirective
+    HoldableDirective,
+    FirereportviewerComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
