@@ -18,11 +18,13 @@
     </mat-card-content>
   </mat-card>
 </div>
-<div class="center-div" fxLayout="column" fxLayoutAlign="center">
+<div class="center-div" fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="center" fxLayoutGap="10px">
   <button mat-raised-button color="warn" *ngIf="holdText != 'Sending...'" appHoldable [ngClass]="{'send-btn-clicked': clicked}"
     (holdTime)="holdHandler($event)" class="send-btn">
     {{holdText}}</button>
   <button mat-raised-button color="warn" [disabled]="true" *ngIf="holdText === 'Sending...'" class="send-btn">
     {{holdText}}</button>
+  <button mat-raised-button class="call-btn" (click)="callBFP()">
+    Call BFP</button>
 
 </div>

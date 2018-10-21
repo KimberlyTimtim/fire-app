@@ -9,6 +9,14 @@ agm-map {
     background-color: red;
   }
 
+  .call-btn {
+    margin: auto;
+    width: 320px;
+    border-radius: 16px;
+    color: white;
+    background-color: green;
+  }
+
   .send-btn-clicked {
     background: linear-gradient(to right, green 50%, red 50%);
   background-size: 200% 100%;

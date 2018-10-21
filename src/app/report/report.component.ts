@@ -82,6 +82,10 @@ export class ReportComponent implements OnInit {
 
   }
 
+  callBFP() {
+    window.open('tel:911')
+  }
+
   sendReport() {
     this.af.collection('firereports').add({
       geo: this.geo,
