@@ -1,0 +1,28 @@
+<agm-map [latitude]="geo.lat" [clickableIcons]="false" [longitude]="geo.lng" [zoom]="zoom" (mapClick)="mapClick($event)">
+  <agm-marker [latitude]="geo.lat" [longitude]="geo.lng"></agm-marker>
+</agm-map>
+
+<div class="center-div-top" fxLayout="column" fxLayoutAlign="center">
+  <mat-card class="address-bar">
+    <mat-card-content>
+      <mat-form-field fxFlex>
+        <input matInput autocorrect="off" placeholder="Address" autocapitalize="off" spellcheck="off" type="text" class="form-control inputbox"
+          #search id="search" [formControl]="searchControl">
+        <button mat-icon-button matSuffix (click)="searchAddress">
+          <mat-icon>search</mat-icon>
+        </button>
+        <button mat-icon-button matSuffix (click)="clearAddress()">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div class="center-div" fxLayout="column" fxLayoutAlign="center">
+  <button mat-raised-button color="warn" *ngIf="holdText != 'Sending...'" appHoldable [ngClass]="{'send-btn-clicked': clicked}"
+    (holdTime)="holdHandler($event)" class="send-btn">
+    {{holdText}}</button>
+  <button mat-raised-button color="warn" [disabled]="true" *ngIf="holdText === 'Sending...'" class="send-btn">
+    {{holdText}}</button>
+
+</div>

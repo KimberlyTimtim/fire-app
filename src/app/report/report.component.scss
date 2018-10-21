@@ -1,0 +1,37 @@
+agm-map {
+    height: 100%;
+  }
+
+  .send-btn {
+    margin: auto;
+    width: 320px;
+    border-radius: 16px;
+    background-color: red;
+  }
+
+  .send-btn-clicked {
+    background: linear-gradient(to right, green 50%, red 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all 5s ease-out;
+  }
+
+  .address-bar {
+    margin: auto;
+        width: 80%;
+    
+    border-radius: 8px;
+
+  }
+
+  .center-div {
+    position: fixed;
+    bottom: 32px;
+    width: 100%;
+  }
+
+  .center-div-top {
+    position: fixed;
+    top: 16px;
+    width: 100%;
+  }
