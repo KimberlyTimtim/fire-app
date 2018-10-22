@@ -24,6 +24,14 @@ export class ReportComponent implements OnInit {
 
   geocode;
 
+  icon = {
+    url: './assets/fire.svg',
+    scaledSize: {
+        width: 40,
+        height: 40
+    }
+}
+
   verifiedFire = []
 
   zoom = 16;

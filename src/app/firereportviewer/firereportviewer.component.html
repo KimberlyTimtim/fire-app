@@ -1,5 +1,63 @@
 <agm-map [latitude]="geo.lat" [longitude]="geo.lng" [zoom]="zoom" (mapClick)="mapClick($event)">
   <agm-marker *ngFor="let report of reports" [latitude]="report.geo.lat" [longitude]="report.geo.lng"></agm-marker>
 
-  <agm-marker *ngFor="let report of verifiedFire" animation="BOUNCE" [latitude]="report.geo.lat" [longitude]="report.geo.lng"></agm-marker>
+  <agm-marker #marker *ngIf="newFire" [latitude]="newFire.lat" [iconUrl]="icon" [longitude]="newFire.lng">
+    <agm-circle *ngIf="newFire" [latitude]="newFire.lat" [longitude]="newFire.lng" [radius]="250">
+    </agm-circle>
+    <agm-info-window>
+      <h3>New Fire</h3>
+      <form action="" [formGroup]="newForm" fxLayout="column" fxLayoutAlign="center">
+        <mat-form-field fxFlex>
+          <mat-select placeholder="Status" formControlName="status">
+            <mat-option value="Verified">Verified</mat-option>
+            <mat-option value="On Going">On Going</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field fxFlex>
+          <mat-select placeholder="Level" formControlName="level">
+            <mat-option value="Alpha">Alpha</mat-option>
+            <mat-option value="Bravo">Bravo</mat-option>
+            <mat-option value="Charlie">Charlie</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="number" formControlName="radius" placeholder="Radius in meters">
+        </mat-form-field>
+        <button mat-button type="button" (click)="createNewFire(marker)" [disabled]="newForm.invalid"
+            color="accent">Send</button>
+      </form>
+    </agm-info-window>
+  </agm-marker>
+
+
+  <agm-marker *ngFor="let report of verifiedFire;let i=index" [iconUrl]="icon" animation="BOUNCE" [latitude]="report.geo.lat"
+    [longitude]="report.geo.lng">
+    <agm-info-window>
+      <div>
+        <h3>{{report.name}}</h3>
+        <form action="" [formGroup]="updateforms[i]" fxLayout="column" fxLayoutAlign="center">
+          <mat-form-field fxFlex>
+            <mat-select placeholder="Status" formControlName="status">
+              <mat-option value="Verified">Verified</mat-option>
+              <mat-option value="On Going">On Going</mat-option>
+              <mat-option value="Fire Out">Fire Out</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field fxFlex>
+            <mat-select placeholder="Level" formControlName="level">
+              <mat-option value="Alpha">Alpha</mat-option>
+              <mat-option value="Bravo">Bravo</mat-option>
+              <mat-option value="Charlie">Charlie</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-button type="button" (click)="update(updateforms[i], report.id)" [disabled]="!updateforms[i].dirty"
+            color="accent">Update</button>
+        </form>
+      </div>
+    </agm-info-window>
+  </agm-marker>
 </agm-map>
+
+<button class="back-btn" routerLink="/home" mat-icon-button>
+  <mat-icon>arrow_back</mat-icon> Home
+</button>

@@ -15,7 +15,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 
 import { AgmCoreModule } from '@agm/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AdditionalinfoComponent } from './additionalinfo/additionalinfo.component';
 import { HoldableDirective } from './holdable.directive';
 import { FirereportviewerComponent } from './firereportviewer/firereportviewer.component';
@@ -39,6 +39,8 @@ declare const google: any;
     BrowserAnimationsModule,
     FlexLayoutModule,
     MaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,

@@ -1,6 +1,6 @@
 <agm-map [latitude]="geo.lat" [clickableIcons]="false" [longitude]="geo.lng" [zoom]="zoom" (mapClick)="mapClick($event)">
   <agm-marker [latitude]="geo.lat" [longitude]="geo.lng"></agm-marker>
-  <agm-marker *ngFor="let report of verifiedFire" animation="BOUNCE" [latitude]="report.geo.lat" [longitude]="report.geo.lng"></agm-marker>
+  <agm-marker *ngFor="let report of verifiedFire" [iconUrl]="icon" animation="BOUNCE" [latitude]="report.geo.lat" [longitude]="report.geo.lng"></agm-marker>
 </agm-map>
 
 <div class="center-div-top" fxLayout="column" fxLayoutAlign="center">
@@ -29,3 +29,5 @@
     Call BFP</button>
 
 </div>
+
+<button class="back-btn" routerLink="/home" mat-icon-button><mat-icon>arrow_back</mat-icon></button>
